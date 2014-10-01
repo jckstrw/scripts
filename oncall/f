@@ -1,0 +1,2 @@
+sed '$s/$/yourText2/' list.txt > list.bk && mv list.bk list.txt
+

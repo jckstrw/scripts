@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+#
+LOGFILE_A=/var/log/syslog
+LOGFILE_B=/var/log/messages
+LOCKFILE=/tmp/.oom.lock
+DATE=`date +%s`
+
+VERSION=`lsb_release -r | awk '{print $2}'`
+
+if [[ $VERSION = 12.04 ]]; then
+	if [[ `grep -i 'Out of memory' $LOGFILE_A` ]]; then
+		echo "OOM Killer is alive"
+		exit 2
+	else
+		echo "OOM sleeps"
+		exit 0
+	fi
+else
+	if [[ `grep -i 'Out of memory' $LOGFILE_B` ]]; then
+		echo "OOM Killer is alive"
+		exit 2
+	else	
+		echo "OOM sleeps"
+		exit 0
+	fi
+fi

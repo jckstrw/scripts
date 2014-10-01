@@ -1,0 +1,30 @@
+#!/bin/bash
+
+TMP_FILE=/tmp/icinga.git
+
+cd /etc/icinga
+
+changed_files="$(git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD)"
+
+result=`/usr/sbin/icinga -v /etc/icinga/icinga.cfg | grep "Total Errors"`
+
+cat > $TMP_FILE << EOF
+Git has pulled new files for Icinga on the backup.
+If there are any errors, Icinga will not reload
+so someone really should take a look.
+
+Files that have changed:
+$changed_files
+
+Output from icheck:
+$result
+EOF
+
+if [[ $result == "Total Errors:   0" ]]; then
+	echo -e "\nNo errors found\nReloading icinga" >> $TMP_FILE
+	service icinga reload
+fi
+
+cat $TMP_FILE | mail -s "Icinga files have changed on backup" sysadmin@sovrn.com
+
+rm $TMP_FILE

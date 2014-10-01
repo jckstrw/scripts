@@ -1,0 +1,3 @@
+index_server "hostname"
+tapedev "changer"
+auth "ssh"
