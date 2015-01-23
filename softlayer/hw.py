@@ -11,11 +11,12 @@ client = SoftLayer.Client(
     api_key=apiKey,
 )
 
-start_date = '12/31/2014'
+start_date = '01/01/2015'
 end_date = '01/07/2015'
 
 # Virtual Guest ID
-server_id = 176354
+#server_id = 176354
+server_id = 295262
 
 # Retrieve all SoftLayer_Monitoring_Agent objects associated with this server
 monitoring_agents = client['Hardware'].getMonitoringAgents(id=server_id)

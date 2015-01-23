@@ -9,5 +9,5 @@ from pprint import pprint as pp
 client = SoftLayer.Client(username=user_name, api_key=api_key)
 
 container = client['Hardware'].findByIpAddress("10.107.112.22")
-#container = client['Hardware'].getRecentEvents()
+container = client['Hardware'].getRecentEvents()
 pp(container)
