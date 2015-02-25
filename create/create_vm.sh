@@ -10,14 +10,14 @@ if [[ `whoami` != 'jmatthews' ]]; then
 fi
 clear
 
-echo "This script is used to create a VM."
+echo "This wrapper is used to create a VM."
 echo "Some of the prompts have a default value, in parenthesis." 
 echo "Accept the default value by hitting return or input your own."
 echo " "
 
 read -p "Name of VM: " NAME
-read -p "RAM (2): " RAM
-RAM=${RAM:-2}
+read -p "RAM (2048): " RAM
+RAM=${RAM:-2048}
 read -p "CPU (1): " CPU
 CPU=${CPU:-1}
 read -p "Disk Path: " DISKPATH
@@ -40,4 +40,7 @@ read -p "FQ Hostname: " HOSTNAME
 read -p "Domain: " DOMAIN 
 read -p "Preseed Image: " IMAGE 
 
-echo "virt-install -n $NAME -r $RAM --vcpus=$CPU --os-type=linux --disk path=$DISKPATH,bus=virtio,format=raw,sparse=false,size=$DISKSIZE -w bridge=$BRIDGE,model=virtio --accelerate --virt-type kvm --location=http:$INSTALLER --vnc --extra-args="netcfg/disable_autoconfig=true netcfg/get_nameservers=10.100.10.31 netcfg/get_ipaddress=$IP netcfg/get_netmask=$MASK netcfg/get_gateway=$GW netcfg/get_hostname=$HOSTNAME netcfg/get_domain=$DOMAIN auto=true url=$IMAGE console=ttyS0,115200n8" "
+echo 
+echo "Here is the command to execute:"
+
+echo virt-install -n $NAME -r $RAM --vcpus=$CPU --os-type=linux --disk path=$DISKPATH,bus=virtio,format=raw,sparse=false,size=$DISKSIZE -w bridge=$BRIDGE,model=virtio --accelerate --virt-type kvm --location=$INSTALLER --vnc --extra-args=\"netcfg/disable_autoconfig=true netcfg/get_nameservers=10.100.10.31 netcfg/get_ipaddress=$IP netcfg/get_netmask=$MASK netcfg/get_gateway=$GW netcfg/get_hostname=$HOSTNAME netcfg/get_domain=$DOMAIN auto=true url=$IMAGE console=ttyS0,115200n8\"
