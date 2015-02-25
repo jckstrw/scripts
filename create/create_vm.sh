@@ -4,7 +4,7 @@
 #
 # jmm - 2015-02-24
 
-if [[ `whoami` != 'jmatthews' ]]; then
+if [[ `whoami` != 'root' ]]; then
         echo "You must be root to run this"
         exit 1
 fi
