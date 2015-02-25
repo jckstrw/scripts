@@ -4,7 +4,7 @@
 #
 # jmm - 2015-02-24
 
-if [[ `whoami` != 'root' ]]; then
+if [[ `whoami` != 'jmatthews' ]]; then
         echo "You must be root to run this"
         exit 1
 fi
@@ -41,6 +41,16 @@ read -p "Domain: " DOMAIN
 read -p "Preseed Image: " IMAGE 
 
 echo 
-echo "Here is the command to execute:"
+echo "Here is the command that will be executed:"
+echo
+COMMAND='virt-install -n $NAME -r $RAM --vcpus=$CPU --os-type=linux --disk path=$DISKPATH,bus=virtio,format=raw,sparse=false,size=$DISKSIZE -w bridge=$BRIDGE,model=virtio --accelerate --virt-type kvm --location=$INSTALLER --vnc --extra-args=\"netcfg/disable_autoconfig=true netcfg/get_nameservers=10.100.10.31 netcfg/get_ipaddress=$IP netcfg/get_netmask=$MASK netcfg/get_gateway=$GW netcfg/get_hostname=$HOSTNAME netcfg/get_domain=$DOMAIN auto=true url=$IMAGE console=ttyS0,115200n8\"'
+echo $COMMAND
+echo
+read -p "If this is correct, please type 'yes': " CONFIRM
+if [ $CONFIRM = yes ];
+then
+	$COMMAND
+else
+	echo "Install aborted"
+fi
 
-echo virt-install -n $NAME -r $RAM --vcpus=$CPU --os-type=linux --disk path=$DISKPATH,bus=virtio,format=raw,sparse=false,size=$DISKSIZE -w bridge=$BRIDGE,model=virtio --accelerate --virt-type kvm --location=$INSTALLER --vnc --extra-args=\"netcfg/disable_autoconfig=true netcfg/get_nameservers=10.100.10.31 netcfg/get_ipaddress=$IP netcfg/get_netmask=$MASK netcfg/get_gateway=$GW netcfg/get_hostname=$HOSTNAME netcfg/get_domain=$DOMAIN auto=true url=$IMAGE console=ttyS0,115200n8\"

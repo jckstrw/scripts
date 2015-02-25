@@ -32,8 +32,13 @@ hostname	= raw_input('FQ Hostname: ')
 domain		= raw_input('Domain: ') 
 image		= raw_input('Preseed Image: ')
 
-print ("") 
-print ('Here is the command to execute:')
-print ("")
-print ('virt-install -n ' + name + ' -r ' + ram + ' --vcpus=' + cpu + ' --os-type=linux --disk path=' + diskpath + ',bus=virtio,format=raw,sparse=false,size=' + disksize + ' -w bridge=' + bridge +',model=virtio --accelerate --virt-type kvm --location=' + installer + ' --vnc --extra-args=\"netcfg/disable_autoconfig=true netcfg/get_nameservers=10.100.10.31 netcfg/get_ipaddress=' + ip + ' netcfg/get_netmask=' + mask + ' netcfg/get_gateway=' + gw + ' netcfg/get_hostname=' + hostname + ' netcfg/get_domain=' + domain + ' auto=true url=' + image + ' console=ttyS0,115200n8\"')
-print ("")
+print ('') 
+print ('Here is the command that will be executed:')
+command		= 'virt-install -n ' + name + ' -r ' + ram + ' --vcpus=' + cpu + ' --os-type=linux --disk path=' + diskpath + ',bus=virtio,format=raw,sparse=false,size=' + disksize + ' -w bridge=' + bridge +',model=virtio --accelerate --virt-type kvm --location=' + installer + ' --vnc --extra-args=\"netcfg/disable_autoconfig=true netcfg/get_nameservers=10.100.10.31 netcfg/get_ipaddress=' + ip + ' netcfg/get_netmask=' + mask + ' netcfg/get_gateway=' + gw + ' netcfg/get_hostname=' + hostname + ' netcfg/get_domain=' + domain + ' auto=true url=' + image + ' console=ttyS0,115200n8\"'
+print command
+print ('')
+confirm		= raw_input('If this is correct, please type \'yes\': ')
+if confirm == 'yes':
+	os.system (command);
+else:
+	print ('Install aborted')
