@@ -1,4 +1,5 @@
 #!/bin/bash
+#
 # 
 # Wrapper script used to create a VM
 #
