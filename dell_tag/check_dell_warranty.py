@@ -6,15 +6,11 @@ import os
 import subprocess
 import sys
 
-__author__ = 'Erinn Looney-Triggs'
-__credits__ = ['Erinn Looney-Triggs', 'Justin Ellison', 'Harald Jensas' ]
-__license__ = 'GPL 3.0'
-__maintainer__ = 'Erinn Looney-Triggs'
-__email__ = 'erinn.looneytriggs@gmail.com'
-__version__ = '4.1'
-__date__ = '2009-02-12'
-__revised__ = '2013-05-13'
-__status__ = 'Production'
+# Get rid of that annoying 
+# InsecureRequestWarning: Unverified HTTPS request is being made.
+# message
+import requests
+requests.packages.urllib3.disable_warnings()
 
 #Nagios exit codes in English
 UNKNOWN  = 3
