@@ -244,10 +244,10 @@ def build_warranty_line(warranty, full_line, days, short_output):
     end_date = warranty['EndDate']
     start_date = warranty['StartDate']
     provider = warranty['ServiceProvider']
-    #machine_type = warranty['MachineDescription']
     
     logger.debug('Found: Start date: {0}, End Date: {1},Description: {2}, '
-                 'Provider: {3}'.format(start_date, end_date, description, provider))
+                 'Provider: {3}'.format(start_date, end_date, description, 
+                                        provider))
     
     #Because we need ot be able to calculate the time left as well as
     #better formatting.
